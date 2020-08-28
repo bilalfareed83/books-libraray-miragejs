@@ -14,17 +14,24 @@ function App() {
   }, []);
 
   const addBook = () => {
-    const title = prompt("wrrite book title");
-    const author = prompt("write author name");
-    fetch("/api/add/", {
-      method: "POST",
-      body: JSON.stringify({
-        title,
-        author,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    try {
+      const title = prompt("wrrite book title");
+      const author = prompt("write author name");
+
+      if (!title || !author) return;
+
+      fetch("/api/add/", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          author,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (!books) return <h2>loading..</h2>;

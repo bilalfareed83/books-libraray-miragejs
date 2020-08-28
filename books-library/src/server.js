@@ -8,6 +8,12 @@ export function makeServer() {
       this.get("/books", () => {
         return books;
       });
+      this.post("/add", (schema, req) => {
+        const newBook = JSON.parse(req.requestBody);
+
+        books.push(newBook);
+        console.log(books);
+      });
     },
   });
 
